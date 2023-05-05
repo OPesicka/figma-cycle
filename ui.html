@@ -1,0 +1,134 @@
+<div class="pluginBox">
+  <h2>Apify Data</h2>
+  <p class="description">
+    Select layers, click a card, see the magic. <br />
+    PS: Make sure the layer type matches the type in the card selected
+  </p>
+  <div class="grid">
+    <div class="card" id="actorName">
+      <h3>Actor name</h3>
+      <p>text</p>
+    </div>
+    <div class="card" id="authorName">
+      <h3>Author name</h3>
+      <p>text</p>
+    </div>
+    <div class="card" id="authorUsername">
+      <h3>Author username</h3>
+      <p>text</p>
+    </div>
+    <div class="card" id="slug">
+      <h3>Actor slug</h3>
+      <p>text</p>
+    </div>
+    <div class="card" id="description">
+      <h3>Actor description</h3>
+      <p>text</p>
+    </div>
+    <div class="card" id="image">
+      <h3>Actor image</h3>
+      <p>frame, rectangle, ellipse</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("actorName").onclick = () => {
+    console.log("pinda");
+    parent.postMessage({ pluginMessage: { type: "actorName" } }, "*");
+  };
+
+  document.getElementById("authorName").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "authorName" } }, "*");
+  };
+
+  document.getElementById("authorUsername").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "authorUsername" } }, "*");
+  };
+
+  document.getElementById("slug").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "slug" } }, "*");
+  };
+
+  document.getElementById("description").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "description" } }, "*");
+  };
+
+  document.getElementById("image").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "image" } }, "*");
+  };
+
+  window.onmessage = async (event) => {
+    if (event.data.pluginMessage.type === "loadImage") {
+      const blob = await fetch(event.data.pluginMessage.imageUrl)
+        .then((result) => result.blob())
+        .then((blob) => blob.arrayBuffer());
+
+      parent.postMessage(
+        {
+          pluginMessage: {
+            type: "blobResult",
+            result: blob,
+          },
+        },
+        "*"
+      );
+    }
+  };
+</script>
+
+<style>
+  .card {
+    display: flex;
+    height: 100px;
+    border-radius: 8px;
+    background-color: #f9fafd;
+    border: 1px solid #cfd4eb;
+    cursor: pointer;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+    gap: 4px;
+    transition: all 120ms;
+  }
+  .card:hover {
+    background-color: white;
+    box-shadow: 0px 0px 1px 0px #2427363d, 0px 2px 4px 0px #24273614,
+      0px 4px 8px 0px #2427361f;
+  }
+  .grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  h3 {
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: #242736;
+  }
+  .pluginBox {
+    margin: 16px;
+  }
+  p {
+    margin: 0;
+    font-size: 12px;
+    color: #6f7490;
+    text-align: center;
+  }
+  .description {
+    font-size: 14px;
+    margin-bottom: 24px;
+    text-align: left;
+    line-height: 20px;
+  }
+  h2 {
+    margin-bottom: 8px;
+  }
+</style>
