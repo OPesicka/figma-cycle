@@ -9,6 +9,10 @@
   },
   "author": "",
   "license": "",
+  "dependencies": {
+    "algoliasearch": "^4.14.2",
+    "dotenv": "^16.0.3"
+  },
   "devDependencies": {
     "@figma/plugin-typings": "^1.42.1",
     "ts-loader": "^9.2.6",
