@@ -11,10 +11,10 @@
   "license": "",
   "dependencies": {
     "algoliasearch": "^4.14.2",
-    "dotenv": "^16.0.3"
+    "figma-api": "^1.11.0"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.42.1",
+    "@figma/plugin-typings": "^1.64.0",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.5",
     "webpack": "^5.69.1",
