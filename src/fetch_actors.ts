@@ -1,6 +1,4 @@
-//return hits
-
-export async function getActor(search) {
+export async function fetchActors(search) {
   let result = {};
   const url = "https://ow0o5i3qo7-dsn.algolia.net/1/indexes/prod_PUBLIC_STORE/query?x-algolia-api-key=0ecccd09f50396a4dbbe5dbfb17f4525&x-algolia-application-id=OW0O5I3QO7";
   const body = {

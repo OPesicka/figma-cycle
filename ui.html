@@ -73,6 +73,7 @@
     if (event.data.pluginMessage.type === "loadImage") {
       const blob = await fetch(event.data.pluginMessage.imageUrl, {
         origin: "Figma",
+        mode: "no-cors",
       })
         .then((result) => result.blob())
         .then((blob) => blob.arrayBuffer());
