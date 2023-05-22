@@ -7,7 +7,7 @@ figma.showUI(__html__, {
 });
 
 figma.ui.onmessage = async (msg) => {
-  const actorData = await getActor("TikTok");
+  const actorData = await getActor(msg.search);
 
   if (msg.type === "actorName") {
     fillTextNode("title", actorData);
@@ -79,6 +79,8 @@ function fillTextNode(stringKey, data) {
       figma.loadFontAsync(node.fontName).then(() => {
         node.characters = data[index][stringKey];
       });
+    } else {
+      figma.notify("❌ Please select a text layer");
     }
   });
 }

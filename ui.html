@@ -1,9 +1,15 @@
 <div class="pluginBox">
   <h2>Apify Data</h2>
-  <p class="description">
-    Select layers, click a card, see the magic. <br />
-    PS: Make sure the layer type matches the type in the card selected
-  </p>
+  <p class="description">Select layers, click a card, and see the magic. <br /></p>
+
+  <label for="actorSearch">Search for actor</label>
+  <input type="text" id="actorSearch" placeholder="Search for actor" oninput="document.getElementById('input-value').innerHTML = event.target.value" />
+
+  <br />
+  <br />
+  <p id="input-value"></p>
+  <br />
+  <br />
   <div class="grid">
     <div class="card" id="actorName">
       <h3>Actor name</h3>
@@ -33,28 +39,34 @@
 </div>
 
 <script>
+  let actorSearch = "";
+
+  document.getElementById("actorSearch").oninput = (event) => {
+    actorSearch = event.target.value;
+  };
+
   document.getElementById("actorName").onclick = () => {
-    parent.postMessage({ pluginMessage: { type: "actorName" } }, "*");
+    parent.postMessage({ pluginMessage: { type: "actorName", search: actorSearch } }, "*");
   };
 
   document.getElementById("authorName").onclick = () => {
-    parent.postMessage({ pluginMessage: { type: "authorName" } }, "*");
+    parent.postMessage({ pluginMessage: { type: "authorName", search: actorSearch } }, "*");
   };
 
   document.getElementById("authorUsername").onclick = () => {
-    parent.postMessage({ pluginMessage: { type: "authorUsername" } }, "*");
+    parent.postMessage({ pluginMessage: { type: "authorUsername", search: actorSearch } }, "*");
   };
 
   document.getElementById("slug").onclick = () => {
-    parent.postMessage({ pluginMessage: { type: "slug" } }, "*");
+    parent.postMessage({ pluginMessage: { type: "slug", search: actorSearch } }, "*");
   };
 
   document.getElementById("description").onclick = () => {
-    parent.postMessage({ pluginMessage: { type: "description" } }, "*");
+    parent.postMessage({ pluginMessage: { type: "description", search: actorSearch } }, "*");
   };
 
   document.getElementById("image").onclick = () => {
-    parent.postMessage({ pluginMessage: { type: "image" } }, "*");
+    parent.postMessage({ pluginMessage: { type: "image", search: actorSearch } }, "*");
   };
 
   window.onmessage = async (event) => {
